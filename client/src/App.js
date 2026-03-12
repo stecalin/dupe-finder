@@ -11,7 +11,7 @@ function App() {
   const handleSearch = async (query) => {
     setLoading(true);
     try {
-      const res = await fetch(`http://localhost:5001/api/dupes/search?q=${query}`);
+      const res = await fetch(`http://localhost:5001/api/amazon/search?q=${query}+dupe`);
       const data = await res.json();
       setResults(data);
       setSearched(true);
@@ -36,8 +36,8 @@ function App() {
           <p className="no-results">No dupes found yet — we're always adding more! 🛍️</p>
         )}
         <div className="results-grid">
-          {results.map(dupe => (
-            <DupeCard key={dupe._id} {...dupe} />
+          {results.map((dupe, index) => (
+            <DupeCard key={index} {...dupe} />
           ))}
         </div>
       </main>
