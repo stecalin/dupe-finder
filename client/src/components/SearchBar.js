@@ -6,7 +6,7 @@ function SearchBar({ onSearch }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSearch(query);
+    if (query.trim()) onSearch(query);
   };
 
   return (
@@ -14,7 +14,7 @@ function SearchBar({ onSearch }) {
       <input
         className="searchbar-input"
         type="text"
-        placeholder="Try 'Stanley Cup' or 'Lululemon bag'..."
+        placeholder="Try 'Dyson Airwrap' or 'Stanley Cup'..."
         value={query}
         onChange={(e) => setQuery(e.target.value)}
       />

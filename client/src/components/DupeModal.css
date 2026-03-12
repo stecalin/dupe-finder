@@ -1,0 +1,151 @@
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(46, 46, 46, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal {
+  background: white;
+  border-radius: 24px;
+  max-width: 760px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: #f5e6e0;
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 13px;
+  cursor: pointer;
+  color: #c4837a;
+  z-index: 10;
+  transition: all 0.2s;
+}
+
+.modal-close:hover {
+  background: #c4837a;
+  color: white;
+}
+
+.modal-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+}
+
+.modal-images {
+  background: #f5e6e0;
+  padding: 24px;
+}
+
+.modal-main-img {
+  aspect-ratio: 1;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 12px;
+  background: white;
+}
+
+.modal-main-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.modal-thumbnails {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.thumb {
+  width: 52px;
+  height: 52px;
+  object-fit: cover;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.15s;
+  background: white;
+}
+
+.thumb.active {
+  border-color: #c4837a;
+}
+
+.thumb:hover {
+  border-color: #c4837a;
+}
+
+.modal-info {
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.modal-brand {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #c4837a;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.modal-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  color: #2e2e2e;
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+
+.modal-rating {
+  font-size: 13px;
+  color: #9a8480;
+  margin-bottom: 16px;
+}
+
+.stars {
+  color: #f4a261;
+  margin-right: 4px;
+}
+
+.modal-price {
+  font-size: 28px;
+  font-weight: 600;
+  color: #2e2e2e;
+  margin-bottom: 24px;
+}
+
+.modal-btn {
+  width: 100%;
+  padding: 14px;
+  background: #c4837a;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-size: 15px;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.modal-btn:hover { background: #a96b62; }

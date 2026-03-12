@@ -32,10 +32,33 @@ router.get("/search", async (req, res) => {
         brand: p.manufacturer || "Amazon",
         price: p.price,
         image: p.imgUrl,
-        link: `https://amazon.com${p.dpUrl}`
+        link: `https://amazon.com${p.dpUrl}`,
+        productRating: p.productRating,
+        countReview: p.countReview,
+        asin: p.asin
       }));
 
     res.json(products);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+router.get("/product/:asin", async (req, res) => {
+  try {
+    const { asin } = req.params;
+    const response = await axios.get(
+      "https://axesso-axesso-amazon-data-service-v1.p.rapidapi.com/amz/amazon-lookup-product",
+      {
+        params: { url: `https://www.amazon.com/dp/${asin}` },
+        headers: {
+          "Content-Type": "application/json",
+          "x-rapidapi-host": "axesso-axesso-amazon-data-service-v1.p.rapidapi.com",
+          "x-rapidapi-key": process.env.RAPIDAPI_KEY
+        }
+      }
+    );
+    res.json(response.data);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
