@@ -3,6 +3,8 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 require("dotenv").config();
 
+const dupesRoute = require("./routes/dupes");
+
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -10,6 +12,8 @@ app.use(express.json());
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log("MongoDB connected ✅"))
   .catch((err) => console.log(err));
+
+app.use("/api/dupes", dupesRoute);
 
 app.get("/", (req, res) => {
   res.send("Dupe Finder API is running ✨");

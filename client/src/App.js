@@ -1,19 +1,24 @@
 import { useState } from "react";
 import SearchBar from "./components/SearchBar";
 import DupeCard from "./components/DupeCard";
-import dupes from "./data";
 import "./App.css";
 
 function App() {
   const [results, setResults] = useState([]);
   const [searched, setSearched] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const handleSearch = (query) => {
-    const filtered = dupes.filter(dupe =>
-      dupe.query.toLowerCase().includes(query.toLowerCase())
-    );
-    setResults(filtered);
-    setSearched(true);
+  const handleSearch = async (query) => {
+    setLoading(true);
+    try {
+      const res = await fetch(`http://localhost:5001/api/dupes/search?q=${query}`);
+      const data = await res.json();
+      setResults(data);
+      setSearched(true);
+    } catch (err) {
+      console.error("Error fetching dupes:", err);
+    }
+    setLoading(false);
   };
 
   return (
@@ -26,12 +31,13 @@ function App() {
       </header>
 
       <main className="results-section">
-        {searched && results.length === 0 && (
+        {loading && <p className="no-results">Finding dupes... ✨</p>}
+        {!loading && searched && results.length === 0 && (
           <p className="no-results">No dupes found yet — we're always adding more! 🛍️</p>
         )}
         <div className="results-grid">
           {results.map(dupe => (
-            <DupeCard key={dupe.id} {...dupe} />
+            <DupeCard key={dupe._id} {...dupe} />
           ))}
         </div>
       </main>
