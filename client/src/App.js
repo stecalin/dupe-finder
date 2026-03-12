@@ -179,13 +179,6 @@ function App() {
           ))}
         </div>
       </main>
-
-      {selectedDupe && (
-        <DupeModal
-          dupe={selectedDupe}
-          onClose={() => setSelectedDupe(null)}
-        />
-      )}
     </>
   );
 
@@ -207,6 +200,8 @@ function App() {
         <DupeModal
           dupe={selectedDupe}
           onClose={() => setSelectedDupe(null)}
+          isWishlisted={isWishlisted(selectedDupe)}
+          onWishlist={() => toggleWishlist(selectedDupe)}
         />
       )}
     </div>

@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import "./DupeModal.css";
 
-function DupeModal({ dupe, onClose }) {
+function DupeModal({ dupe, onClose, onWishlist, isWishlisted }) {
   const [images, setImages] = useState([dupe.image]);
   const [activeImg, setActiveImg] = useState(dupe.image);
   const [loading, setLoading] = useState(true);
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     const fetchImages = async () => {
@@ -22,6 +23,12 @@ function DupeModal({ dupe, onClose }) {
     };
     fetchImages();
   }, [dupe.asin]);
+
+  const handleShare = () => {
+    navigator.clipboard.writeText(dupe.link);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   const rating = dupe.productRating ? dupe.productRating.split(" ")[0] : null;
   const stars = rating ? "★".repeat(Math.round(parseFloat(rating))) + "☆".repeat(5 - Math.round(parseFloat(rating))) : null;
@@ -61,9 +68,22 @@ function DupeModal({ dupe, onClose }) {
               </p>
             )}
             <p className="modal-price">${dupe.price}</p>
-            <a href={dupe.link} target="_blank" rel="noreferrer">
-              <button className="modal-btn">View on Amazon ↗</button>
-            </a>
+
+            <div className="modal-actions">
+              <a href={dupe.link} target="_blank" rel="noreferrer" style={{ flex: 1 }}>
+                <button className="modal-btn">View on Amazon ↗</button>
+              </a>
+              <button
+                className={`modal-heart ${isWishlisted ? "wishlisted" : ""}`}
+                onClick={onWishlist}
+              >
+                {isWishlisted ? "♥" : "♡"}
+              </button>
+              <button className="modal-share" onClick={handleShare}>
+                {copied ? "✓" : "⎘"}
+              </button>
+            </div>
+            {copied && <p className="modal-copied">Link copied to clipboard!</p>}
           </div>
         </div>
       </div>

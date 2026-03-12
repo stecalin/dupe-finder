@@ -149,3 +149,61 @@
 }
 
 .modal-btn:hover { background: #a96b62; }
+
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.modal-actions a {
+  flex: 1;
+}
+
+.modal-actions .modal-btn {
+  width: 100%;
+}
+
+.modal-heart {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1.5px solid #ecddd9;
+  background: white;
+  font-size: 18px;
+  color: #c4837a;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+
+.modal-heart.wishlisted {
+  background: #c4837a;
+  color: white;
+  border-color: #c4837a;
+}
+
+.modal-share {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1.5px solid #ecddd9;
+  background: white;
+  font-size: 18px;
+  color: #9a8480;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+
+.modal-share:hover {
+  border-color: #c4837a;
+  color: #c4837a;
+}
+
+.modal-copied {
+  font-size: 12px;
+  color: #c4837a;
+  margin-top: 8px;
+  text-align: center;
+}
